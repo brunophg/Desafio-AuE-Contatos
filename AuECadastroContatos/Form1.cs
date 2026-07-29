@@ -94,7 +94,7 @@ namespace AuECadastroContatos
         {
             try
             {
-                if (e.RowIndex >=0)
+                if (e.RowIndex >= 0)
                 {
                     DataGridViewRow linha = dgvContatos.Rows[e.RowIndex];
 
@@ -106,7 +106,7 @@ namespace AuECadastroContatos
                 }
             }
             catch (Exception ex)
-            {   
+            {
                 MessageBox.Show("Erro ao selecionar contato: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -147,6 +147,35 @@ namespace AuECadastroContatos
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnExcluir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (idSelecionado == 0)
+                {
+                    MessageBox.Show("Por favor, selecione um contato na tabela para excluir", "Aviso", MessageBoxButtons.OK);
+                    return;
+                } 
+
+                repositorio.Excluir(idSelecionado);
+
+                MessageBox.Show("Contato excluído", "Sucesso", MessageBoxButtons.OK);
+
+                AtualizarTabela();
+
+                txtNome.Clear();
+                txtCidade.Clear();
+                cbSexo.SelectedIndex = -1;
+
+                
+                idSelecionado = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao excluir: " + ex.Message, "Erro", MessageBoxButtons.OK);
             }
         }
     }
