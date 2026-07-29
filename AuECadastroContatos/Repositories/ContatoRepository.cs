@@ -62,5 +62,38 @@ namespace AuECadastroContatos.Repositories
             }
             return listaContatos;
         }
+        public void Inserir(Contato contato)
+        {
+            OleDbConnection conexao = null;
+            OleDbCommand comando = null;
+
+            try
+            {
+                conexao = new OleDbConnection(stringConexao);
+                conexao.Open();
+
+                string query = "INSERT INTO Contatos (Nome, Sexo, Cidade) VALUES (?, ?, ?)";
+                comando = new OleDbCommand(query, conexao);
+
+                comando.Parameters.AddWithValue("@Nome", contato.Nome);
+                comando.Parameters.AddWithValue("@Sexo", contato.Sexo);
+                comando.Parameters.AddWithValue("@Cidade", contato.Cidade);
+
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Erro ao inserir contato no banco: " + e.Message);
+            }
+            finally
+            {
+                if (comando != null) { comando.Dispose(); }
+                if (conexao != null)
+                {
+                    conexao.Close();
+                    conexao.Dispose();
+                }
+            }
+        }
     }
 }
