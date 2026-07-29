@@ -36,7 +36,7 @@ namespace AuECadastroContatos.Repositories
 
                 while (reader.Read())
                 {
-                    var contato = new Contato
+                    var contato = new Contato()
                     {
                         CodContato = Convert.ToInt32(reader["CodContato"]),
                         Nome = reader["Nome"].ToString(),

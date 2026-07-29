@@ -1,4 +1,5 @@
-﻿using AuECadastroContatos.Repositories;
+﻿using AuECadastroContatos.Models;
+using AuECadastroContatos.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -65,6 +66,37 @@ namespace AuECadastroContatos
         private void cbSexo_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnInserir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(txtNome.Text))
+                {
+                    MessageBox.Show("O campo Nome é obrigatório!", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                Contato novoContato = new Contato()
+                {
+                    Nome = txtNome.Text,
+                    Cidade = txtCidade.Text,
+                    Sexo = cbSexo.Text
+                };
+
+                repositorio.Inserir(novoContato);
+
+                MessageBox.Show("Contato inserido com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                AtualizarTabela();
+
+                txtNome.Clear();
+                txtCidade.Clear();
+                cbSexo.SelectedIndex = -1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
