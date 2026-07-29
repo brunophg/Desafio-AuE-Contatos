@@ -29,7 +29,7 @@ namespace AuECadastroContatos.Repositories
                 conexao = new OleDbConnection(stringConexao);
                 conexao.Open();
 
-                string query = "SELECT Nome, Sexo, Cidade FROM Contatos";
+                string query = "SELECT CodContato, Nome, Sexo, Cidade FROM Contatos";
                 comando = new OleDbCommand(query, conexao);
 
                 reader = comando.ExecuteReader();
@@ -38,6 +38,7 @@ namespace AuECadastroContatos.Repositories
                 {
                     var contato = new Contato
                     {
+                        CodContato = Convert.ToInt32(reader["CodContato"]),
                         Nome = reader["Nome"].ToString(),
                         Sexo = reader["Sexo"].ToString(),
                         Cidade = reader["Cidade"].ToString()
@@ -106,12 +107,13 @@ namespace AuECadastroContatos.Repositories
                 conexao = new OleDbConnection(stringConexao);
                 conexao.Open();
 
-                string query = "UPDATE Contatos SET Sexo = ?, Cidade = ? WHERE Nome = ?";
+                string query = "UPDATE Contatos SET Sexo = ?, Cidade = ? WHERE CodContato = ?";
                 comando = new OleDbCommand(query, conexao);
 
                 comando.Parameters.AddWithValue("@Sexo", contato.Sexo);
                 comando.Parameters.AddWithValue("@Cidade", contato.Cidade);
                 comando.Parameters.AddWithValue("@Nome", contato.Nome);
+                comando.Parameters.AddWithValue("@CodContato", contato.CodContato);
 
                 comando.ExecuteNonQuery();
             }
