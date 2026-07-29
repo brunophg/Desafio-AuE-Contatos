@@ -95,5 +95,42 @@ namespace AuECadastroContatos.Repositories
                 }
             }
         }
+
+        public void Alterar(Contato contato)
+        {
+            OleDbConnection conexao = null;
+            OleDbCommand comando = null;
+
+            try
+            {
+                conexao = new OleDbConnection(stringConexao);
+                conexao.Open();
+
+                string query = "UPDATE Contatos SET Sexo = ?, Cidade = ? WHERE Nome = ?";
+                comando = new OleDbCommand(query, conexao);
+
+                comando.Parameters.AddWithValue("@Sexo", contato.Sexo);
+                comando.Parameters.AddWithValue("@Cidade", contato.Cidade);
+                comando.Parameters.AddWithValue("@Nome", contato.Nome);
+
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Erro ao alterar contato no banco: " + e.Message);
+            }
+            finally
+            {
+                if (comando != null) { comando.Dispose(); }
+                if (conexao != null)
+                {
+                    conexao.Close();
+                    conexao.Dispose();
+                }
+            }
+        }
+
+
     }
+
 }
