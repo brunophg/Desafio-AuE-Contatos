@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace AuECadastroContatos.Models
 {
-    internal class Contato
+    public class Contato
     {
+        public string Nome { get; set; }
+        public string Sexo { get; set; }
+        public string Cidade { get; set; }
     }
 }
