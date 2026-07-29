@@ -130,7 +130,39 @@ namespace AuECadastroContatos.Repositories
             }
         }
 
+        public void Excluir(int codContato)
+        {
+            OleDbConnection conexao = null;
+            OleDbCommand comando = null;
 
+            try
+            {
+                conexao = new OleDbConnection(stringConexao);
+                conexao.Open();
+
+                string query = "DELETE FROM Contatos WHERE CodContato = ?";
+                comando = new OleDbCommand(query, conexao);
+
+                comando.Parameters.AddWithValue("@CodContato", codContato);
+
+                comando.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Erro ao excluir contato no banco: " + e.Message);
+            }
+            finally
+            {
+                if (comando != null)
+                {
+                    comando.Dispose();
+                }
+                if (conexao != null)
+                {
+                    conexao.Close();
+                }
+            }
+
+        }
     }
-
 }
