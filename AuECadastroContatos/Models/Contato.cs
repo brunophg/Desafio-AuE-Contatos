@@ -12,5 +12,6 @@ namespace AuECadastroContatos.Models
         public string Nome { get; set; }
         public string Sexo { get; set; }
         public string Cidade { get; set; }
+        public DateTime Data { get; set; }
     }
 }

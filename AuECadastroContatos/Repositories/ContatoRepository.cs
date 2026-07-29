@@ -29,7 +29,8 @@ namespace AuECadastroContatos.Repositories
                 conexao = new OleDbConnection(stringConexao);
                 conexao.Open();
 
-                string query = "SELECT CodContato, Nome, Sexo, Cidade FROM Contatos";
+                string query = "SELECT CodContato, Nome, Sexo, Cidade, Data FROM Contatos";
+            
                 comando = new OleDbCommand(query, conexao);
 
                 reader = comando.ExecuteReader();
@@ -41,8 +42,15 @@ namespace AuECadastroContatos.Repositories
                         CodContato = Convert.ToInt32(reader["CodContato"]),
                         Nome = reader["Nome"].ToString(),
                         Sexo = reader["Sexo"].ToString(),
-                        Cidade = reader["Cidade"].ToString()
+                        Cidade = reader["Cidade"].ToString(),
+
                     };
+
+                    if (reader["Data"] != DBNull.Value)
+                    {
+                        contato.Data = Convert.ToDateTime(reader["Data"]);
+                    }
+                
                     listaContatos.Add(contato);
                 }
 
@@ -83,13 +91,14 @@ namespace AuECadastroContatos.Repositories
                     codigoInicial = Convert.ToInt32(resultadoMax) + 1;
                 }
 
-                string query = "INSERT INTO Contatos (CodContato, Nome, Sexo, Cidade) VALUES (?, ?, ?, ?)";
+                string query = "INSERT INTO Contatos (CodContato, Nome, Sexo, Cidade, Data) VALUES (?, ?, ?, ?, ?)";
                 comando = new OleDbCommand(query, conexao);
 
                 comando.Parameters.AddWithValue("@CodContato", codigoInicial);
                 comando.Parameters.AddWithValue("@Nome", contato.Nome);
                 comando.Parameters.AddWithValue("@Sexo", contato.Sexo);
                 comando.Parameters.AddWithValue("@Cidade", contato.Cidade);
+                comando.Parameters.Add("@Data", OleDbType.Date).Value = DateTime.Now.Date;
 
                 comando.ExecuteNonQuery();
             }

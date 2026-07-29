@@ -37,15 +37,16 @@
             this.btnInserir = new System.Windows.Forms.Button();
             this.btnAlterar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
-            this.btnLimpar = new System.Windows.Forms.Button();
             this.dgvContatos = new System.Windows.Forms.DataGridView();
+            this.btnAnalise = new System.Windows.Forms.Button();
+            this.txtAnalise = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContatos)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(290, 68);
+            this.label1.Location = new System.Drawing.Point(90, 74);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 16);
             this.label1.TabIndex = 0;
@@ -54,7 +55,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(290, 93);
+            this.label2.Location = new System.Drawing.Point(90, 99);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(51, 16);
             this.label2.TabIndex = 1;
@@ -63,7 +64,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(290, 124);
+            this.label3.Location = new System.Drawing.Point(90, 130);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 16);
             this.label3.TabIndex = 2;
@@ -72,7 +73,7 @@
             // 
             // txtNome
             // 
-            this.txtNome.Location = new System.Drawing.Point(347, 65);
+            this.txtNome.Location = new System.Drawing.Point(147, 71);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(150, 22);
             this.txtNome.TabIndex = 3;
@@ -80,7 +81,7 @@
             // 
             // txtCidade
             // 
-            this.txtCidade.Location = new System.Drawing.Point(347, 93);
+            this.txtCidade.Location = new System.Drawing.Point(147, 99);
             this.txtCidade.Name = "txtCidade";
             this.txtCidade.Size = new System.Drawing.Size(150, 22);
             this.txtCidade.TabIndex = 4;
@@ -92,7 +93,7 @@
             this.cbSexo.Items.AddRange(new object[] {
             "M",
             "F"});
-            this.cbSexo.Location = new System.Drawing.Point(347, 121);
+            this.cbSexo.Location = new System.Drawing.Point(147, 127);
             this.cbSexo.Name = "cbSexo";
             this.cbSexo.Size = new System.Drawing.Size(150, 24);
             this.cbSexo.TabIndex = 5;
@@ -101,7 +102,7 @@
             // 
             // btnInserir
             // 
-            this.btnInserir.Location = new System.Drawing.Point(215, 211);
+            this.btnInserir.Location = new System.Drawing.Point(91, 217);
             this.btnInserir.Name = "btnInserir";
             this.btnInserir.Size = new System.Drawing.Size(75, 23);
             this.btnInserir.TabIndex = 6;
@@ -111,7 +112,7 @@
             // 
             // btnAlterar
             // 
-            this.btnAlterar.Location = new System.Drawing.Point(323, 211);
+            this.btnAlterar.Location = new System.Drawing.Point(172, 217);
             this.btnAlterar.Name = "btnAlterar";
             this.btnAlterar.Size = new System.Drawing.Size(75, 23);
             this.btnAlterar.TabIndex = 7;
@@ -121,7 +122,7 @@
             // 
             // btnExcluir
             // 
-            this.btnExcluir.Location = new System.Drawing.Point(438, 211);
+            this.btnExcluir.Location = new System.Drawing.Point(253, 217);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(75, 23);
             this.btnExcluir.TabIndex = 8;
@@ -129,33 +130,45 @@
             this.btnExcluir.UseVisualStyleBackColor = true;
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
-            // btnLimpar
-            // 
-            this.btnLimpar.Location = new System.Drawing.Point(548, 211);
-            this.btnLimpar.Name = "btnLimpar";
-            this.btnLimpar.Size = new System.Drawing.Size(75, 23);
-            this.btnLimpar.TabIndex = 9;
-            this.btnLimpar.Text = "Limpar";
-            this.btnLimpar.UseVisualStyleBackColor = true;
-            // 
             // dgvContatos
             // 
             this.dgvContatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvContatos.Location = new System.Drawing.Point(115, 323);
+            this.dgvContatos.Location = new System.Drawing.Point(91, 305);
             this.dgvContatos.Name = "dgvContatos";
             this.dgvContatos.RowHeadersWidth = 51;
             this.dgvContatos.RowTemplate.Height = 24;
-            this.dgvContatos.Size = new System.Drawing.Size(605, 150);
+            this.dgvContatos.Size = new System.Drawing.Size(666, 193);
             this.dgvContatos.TabIndex = 10;
             this.dgvContatos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContatos_CellDoubleClick);
+            // 
+            // btnAnalise
+            // 
+            this.btnAnalise.Location = new System.Drawing.Point(533, 67);
+            this.btnAnalise.Name = "btnAnalise";
+            this.btnAnalise.Size = new System.Drawing.Size(237, 23);
+            this.btnAnalise.TabIndex = 11;
+            this.btnAnalise.Text = "Contar No de contatos por cidade";
+            this.btnAnalise.UseVisualStyleBackColor = true;
+            this.btnAnalise.Click += new System.EventHandler(this.btnAnalise_Click);
+            // 
+            // txtAnalise
+            // 
+            this.txtAnalise.Location = new System.Drawing.Point(514, 114);
+            this.txtAnalise.Multiline = true;
+            this.txtAnalise.Name = "txtAnalise";
+            this.txtAnalise.ReadOnly = true;
+            this.txtAnalise.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtAnalise.Size = new System.Drawing.Size(274, 163);
+            this.txtAnalise.TabIndex = 12;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 664);
+            this.Controls.Add(this.txtAnalise);
+            this.Controls.Add(this.btnAnalise);
             this.Controls.Add(this.dgvContatos);
-            this.Controls.Add(this.btnLimpar);
             this.Controls.Add(this.btnExcluir);
             this.Controls.Add(this.btnAlterar);
             this.Controls.Add(this.btnInserir);
@@ -185,8 +198,9 @@
         private System.Windows.Forms.Button btnInserir;
         private System.Windows.Forms.Button btnAlterar;
         private System.Windows.Forms.Button btnExcluir;
-        private System.Windows.Forms.Button btnLimpar;
         private System.Windows.Forms.DataGridView dgvContatos;
+        private System.Windows.Forms.Button btnAnalise;
+        private System.Windows.Forms.TextBox txtAnalise;
     }
 }
 

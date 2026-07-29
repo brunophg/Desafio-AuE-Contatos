@@ -107,7 +107,7 @@ namespace AuECadastroContatos
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Erro ao selecionar contato: " + ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erro ao selecionar contato: " + ex.Message, "Erro", MessageBoxButtons.OK);
             }
         }
 
@@ -135,7 +135,7 @@ namespace AuECadastroContatos
                 };
 
                 repositorio.Alterar(contatoAtualizado);
-                MessageBox.Show("Contato alterado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Contato alterado com sucesso!", "Sucesso", MessageBoxButtons.OK);
                 AtualizarTabela();
 
                 txtNome.Clear();
@@ -158,7 +158,7 @@ namespace AuECadastroContatos
                 {
                     MessageBox.Show("Por favor, selecione um contato na tabela para excluir", "Aviso", MessageBoxButtons.OK);
                     return;
-                } 
+                }
 
                 repositorio.Excluir(idSelecionado);
 
@@ -170,12 +170,61 @@ namespace AuECadastroContatos
                 txtCidade.Clear();
                 cbSexo.SelectedIndex = -1;
 
-                
+
                 idSelecionado = 0;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Erro ao excluir: " + ex.Message, "Erro", MessageBoxButtons.OK);
+            }
+        }
+
+        private void btnAnalise_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var contatos = repositorio.ObterTodos();
+
+                if (contatos.Count == 0)
+                {
+                    MessageBox.Show("Não há contatos cadastrados para analise.", "Aviso", MessageBoxButtons.OK);
+                    return;
+                }
+                StringBuilder sb = new StringBuilder();
+
+                int totalGeral = contatos.Count;
+                int totalHomens = contatos.Count(c => c.Sexo == "M");
+                int totalMulheres = contatos.Count(c => c.Sexo == "F");
+
+                sb.AppendLine("Analise dos contatos");
+                sb.AppendLine($". Número de contatos no banco de dados: {totalGeral}, {totalHomens} homens e {totalMulheres} mulheres");
+
+                int minMes = contatos.Min(c => c.Data.Month);
+                int maxMes = contatos.Max(c => c.Data.Month);
+
+                string[] nomesMeses = { "", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" };
+                var contatosPorCidade = contatos.GroupBy(c => c.Cidade).OrderBy(g => g.Key);
+
+                foreach (var grupo in contatosPorCidade)
+                {
+                    sb.AppendLine($". Contatos em {grupo.Key.ToUpper()}:");
+
+                    for (int i = minMes; i <= maxMes; i++)
+                    {
+                        var contatosMes = grupo.Where(c => c.Data.Month == i).ToList();
+                        int qtdMes = contatosMes.Count;
+                        int qtdM = contatosMes.Count(c => c.Sexo == "M");
+                        int qtdF = contatosMes.Count(c => c.Sexo == "F");
+
+                        sb.AppendLine($". {nomesMeses[i]}: {qtdMes}, {qtdM} homens e {qtdF} mulheres");
+                    }
+                    sb.AppendLine($". Total: {grupo.Count()}");
+                }
+                txtAnalise.Text = sb.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao gerar relatório: " + ex.Message, "Erro", MessageBoxButtons.OK);
             }
         }
     }
