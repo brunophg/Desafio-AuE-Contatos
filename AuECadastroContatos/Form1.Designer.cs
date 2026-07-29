@@ -117,7 +117,7 @@
             this.btnAlterar.TabIndex = 7;
             this.btnAlterar.Text = "Alterar";
             this.btnAlterar.UseVisualStyleBackColor = true;
-            this.btnAlterar.Click += new System.EventHandler(this.button2_Click);
+            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
             // btnExcluir
             // 
@@ -127,7 +127,6 @@
             this.btnExcluir.TabIndex = 8;
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.UseVisualStyleBackColor = true;
-            this.btnExcluir.Click += new System.EventHandler(this.button3_Click);
             // 
             // btnLimpar
             // 
@@ -147,6 +146,7 @@
             this.dgvContatos.RowTemplate.Height = 24;
             this.dgvContatos.Size = new System.Drawing.Size(605, 150);
             this.dgvContatos.TabIndex = 10;
+            this.dgvContatos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContatos_CellDoubleClick);
             // 
             // Form1
             // 

@@ -36,7 +36,7 @@ namespace AuECadastroContatos.Repositories
 
                 while (reader.Read())
                 {
-                    var contato = new Contato()
+                    Contato contato = new Contato()
                     {
                         CodContato = Convert.ToInt32(reader["CodContato"]),
                         Nome = reader["Nome"].ToString(),
@@ -73,9 +73,20 @@ namespace AuECadastroContatos.Repositories
                 conexao = new OleDbConnection(stringConexao);
                 conexao.Open();
 
-                string query = "INSERT INTO Contatos (Nome, Sexo, Cidade) VALUES (?, ?, ?)";
+                string queryMax = "SELECT MAX(CodContato) FROM Contatos";
+                OleDbCommand comandoMax = new OleDbCommand(queryMax, conexao);
+                object resultadoMax = comandoMax.ExecuteScalar();
+               
+                int codigoInicial = 1; 
+                if (resultadoMax != DBNull.Value)
+                {
+                    codigoInicial = Convert.ToInt32(resultadoMax) + 1;
+                }
+
+                string query = "INSERT INTO Contatos (CodContato, Nome, Sexo, Cidade) VALUES (?, ?, ?, ?)";
                 comando = new OleDbCommand(query, conexao);
 
+                comando.Parameters.AddWithValue("@CodContato", codigoInicial);
                 comando.Parameters.AddWithValue("@Nome", contato.Nome);
                 comando.Parameters.AddWithValue("@Sexo", contato.Sexo);
                 comando.Parameters.AddWithValue("@Cidade", contato.Cidade);
@@ -107,12 +118,12 @@ namespace AuECadastroContatos.Repositories
                 conexao = new OleDbConnection(stringConexao);
                 conexao.Open();
 
-                string query = "UPDATE Contatos SET Sexo = ?, Cidade = ? WHERE CodContato = ?";
+                string query = "UPDATE Contatos SET Nome = ?, Sexo = ?, Cidade = ? WHERE CodContato = ?";
                 comando = new OleDbCommand(query, conexao);
 
+                comando.Parameters.AddWithValue("@Nome", contato.Nome);
                 comando.Parameters.AddWithValue("@Sexo", contato.Sexo);
                 comando.Parameters.AddWithValue("@Cidade", contato.Cidade);
-                comando.Parameters.AddWithValue("@Nome", contato.Nome);
                 comando.Parameters.AddWithValue("@CodContato", contato.CodContato);
 
                 comando.ExecuteNonQuery();
@@ -162,6 +173,7 @@ namespace AuECadastroContatos.Repositories
                 if (conexao != null)
                 {
                     conexao.Close();
+                    conexao.Dispose();
                 }
             }
 
