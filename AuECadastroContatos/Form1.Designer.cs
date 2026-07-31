@@ -102,7 +102,7 @@
             // 
             // btnInserir
             // 
-            this.btnInserir.Location = new System.Drawing.Point(91, 217);
+            this.btnInserir.Location = new System.Drawing.Point(85, 168);
             this.btnInserir.Name = "btnInserir";
             this.btnInserir.Size = new System.Drawing.Size(75, 23);
             this.btnInserir.TabIndex = 6;
@@ -112,7 +112,7 @@
             // 
             // btnAlterar
             // 
-            this.btnAlterar.Location = new System.Drawing.Point(172, 217);
+            this.btnAlterar.Location = new System.Drawing.Point(166, 168);
             this.btnAlterar.Name = "btnAlterar";
             this.btnAlterar.Size = new System.Drawing.Size(75, 23);
             this.btnAlterar.TabIndex = 7;
@@ -122,7 +122,7 @@
             // 
             // btnExcluir
             // 
-            this.btnExcluir.Location = new System.Drawing.Point(253, 217);
+            this.btnExcluir.Location = new System.Drawing.Point(247, 168);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(75, 23);
             this.btnExcluir.TabIndex = 8;
@@ -133,7 +133,7 @@
             // dgvContatos
             // 
             this.dgvContatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvContatos.Location = new System.Drawing.Point(91, 305);
+            this.dgvContatos.Location = new System.Drawing.Point(85, 319);
             this.dgvContatos.Name = "dgvContatos";
             this.dgvContatos.RowHeadersWidth = 51;
             this.dgvContatos.RowTemplate.Height = 24;
